@@ -1,26 +1,25 @@
-import { Franchise } from 'src/franchises/entities/franchise.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Branch {
+export class Product {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ length: 80, nullable: false })
   name: string;
 
-  @ManyToOne(() => Franchise, (user) => user.id, {
-    eager: true,
-  })
-  Franchise: Franchise;
+  @Column({ length: 500, nullable: true })
+  description: string;
+
+  @Column({ nullable: false })
+  price: number;
 
   @CreateDateColumn()
   createdAt: Date;

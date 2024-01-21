@@ -14,7 +14,7 @@ export class Franchise {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 500, nullable: false })
+  @Column({ length: 80, nullable: false })
   name: string;
 
   @CreateDateColumn()

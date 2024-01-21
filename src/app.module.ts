@@ -3,6 +3,7 @@ import { FranchisesModule } from './franchises/franchises.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BranchesModule } from './branches/branches.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { BranchesModule } from './branches/branches.module';
     }),
     FranchisesModule,
     BranchesModule,
+    ProductsModule,
   ],
   controllers: [],
   providers: [],
