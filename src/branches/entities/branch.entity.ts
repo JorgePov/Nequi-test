@@ -1,10 +1,12 @@
 import { Franchise } from 'src/franchises/entities/franchise.entity';
+import { Stock } from 'src/stock/entities/stock.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -17,10 +19,10 @@ export class Branch {
   @Column({ length: 80, nullable: false })
   name: string;
 
-  @ManyToOne(() => Franchise, (user) => user.id, {
+  @ManyToOne(() => Franchise, (franchise) => franchise.id, {
     eager: true,
   })
-  Franchise: Franchise;
+  franchise: Franchise;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -30,4 +32,7 @@ export class Branch {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Stock, (stock) => stock.products)
+  stock: Stock;
 }

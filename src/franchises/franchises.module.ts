@@ -8,6 +8,5 @@ import { Franchise } from './entities/franchise.entity';
   imports: [TypeOrmModule.forFeature([Franchise])],
   controllers: [FranchisesController],
   providers: [FranchisesService],
-  exports: [TypeOrmModule, FranchisesService],
 })
 export class FranchisesModule {}

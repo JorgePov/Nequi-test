@@ -1,8 +1,10 @@
+import { Stock } from 'src/stock/entities/stock.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -29,4 +31,7 @@ export class Product {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Stock, (stock) => stock.products)
+  stock: Stock;
 }

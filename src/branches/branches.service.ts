@@ -25,7 +25,7 @@ export class BranchesService {
 
     const newPost = this.branchRepository.create({
       ...createBranchDto,
-      Franchise: validFranchise,
+      franchise: validFranchise,
     });
     return await this.branchRepository.save(newPost);
   }

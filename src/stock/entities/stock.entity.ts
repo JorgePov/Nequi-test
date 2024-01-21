@@ -1,21 +1,21 @@
 import { Branch } from 'src/branches/entities/branch.entity';
+import { Product } from 'src/products/entities/product.entity';
 import {
   Column,
   CreateDateColumn,
-  DeleteDateColumn,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Franchise {
+export class Stock {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 80, nullable: false })
-  name: string;
+  @Column({ nullable: false })
+  units: number;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -23,9 +23,13 @@ export class Franchise {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @DeleteDateColumn()
-  deletedAt: Date;
-
-  @OneToMany(() => Branch, (post) => post.franchise)
+  @ManyToOne(() => Branch, (branch) => branch.id, {
+    eager: true,
+  })
   branches: Branch;
+
+  @ManyToOne(() => Product, (product) => product.id, {
+    eager: true,
+  })
+  products: Product;
 }
