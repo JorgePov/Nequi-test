@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.3
+    container_name: mysql_nequi
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: 'nequi_db'
+      MYSQL_USER: 'nequi_user'
+      MYSQL_PASSWORD: 'qweasdqwe'
+      MYSQL_ROOT_PASSWORD: 'qweasdqwe'
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    networks:
+      - nequi-network
+
+  api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: backend_nequi
+    volumes:
+      - ./:/api
+    working_dir: /api
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    depends_on:
+      - mysql
+    networks:
+      - nequi-network
+
+networks:
+  nequi-network:
+    driver: bridge
+
+volumes:
+  database:
