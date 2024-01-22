@@ -30,12 +30,24 @@ export class StockService {
       createStockDto.productId,
     );
 
-    const validStock = await this.stockRepository.findOneBy({
-      branches: validBranche,
-      products: validProduct,
+    if (validProduct.franchise.id !== validBranche.franchise.id) {
+      throw new BadRequestException(
+        'Product and branch must belong to the same franchise',
+      );
+    }
+
+    const validStock = await this.stockRepository.find({
+      where: {
+        branches: {
+          id: validProduct.franchise.id,
+        },
+        products: {
+          id: validBranche.franchise.id,
+        },
+      },
     });
 
-    if (validStock !== undefined) {
+    if (validStock.length !== 0) {
       throw new BadRequestException('Product already exists in branch');
     }
 
