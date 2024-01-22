@@ -10,5 +10,6 @@ import { Franchise } from 'src/franchises/entities/franchise.entity';
   imports: [TypeOrmModule.forFeature([Branch, Franchise])],
   controllers: [BranchesController],
   providers: [BranchesService, FranchisesService],
+  exports: [BranchesService],
 })
 export class BranchesModule {}

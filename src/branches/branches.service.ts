@@ -45,4 +45,14 @@ export class BranchesService {
   async remove(id: number) {
     return await this.branchRepository.softDelete({ id });
   }
+
+  async findByFranchise(franchiseId: number) {
+    return await this.branchRepository.find({
+      where: {
+        franchise: {
+          id: franchiseId,
+        },
+      },
+    });
+  }
 }

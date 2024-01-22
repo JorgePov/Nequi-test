@@ -57,4 +57,28 @@ export class StockService {
   async remove(id: number) {
     return await this.stockRepository.delete({ id });
   }
+
+  async getMaxStockByBranches(branchIds: number[]) {
+    const queryBuilder = await this.stockRepository
+      .createQueryBuilder('stock')
+      .innerJoinAndSelect('stock.products', 'product')
+      .innerJoinAndSelect('stock.branches', 'branch')
+      .innerJoin(
+        (subQuery) =>
+          subQuery
+            .select(['s.branchesId', 'MAX(s.units) as max_unit'])
+            .from(Stock, 's')
+            .groupBy('s.branchesId'),
+        'sq',
+        'sq.branchesId = stock.branchesId AND stock.units = sq.max_unit',
+      )
+      .select([
+        'product.name as product',
+        'branch.name as branch',
+        'stock.units as units',
+      ])
+      .where('stock.branchesId IN (:...branchIds)', { branchIds });
+
+    return queryBuilder.getRawMany();
+  }
 }
