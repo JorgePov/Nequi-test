@@ -1,72 +1,78 @@
+
+# Prueba Tecnica[Nequi] - Jorge Poveda
+
+
+
+## Breve explicacion
+
+Realizacion de Prueba tecnica para nequi, se solicito un backend que permita la creacion de franquicias, sucurcursales y productos, adicional un reporte que los productos com mas unidades dentro de cada una de las sucursales que pertenece a una franquicia en especifico
+
+## Documentacion de endpoints
+
+La documentacion se puede encontrar en el siguiente enlace: [Postman]
+
+
+## Modelo DB aplicado
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AEYmBYR4PhnWOXfc3pJilsa8EtS2anLtpgPtUb3VJPU7V32rjJGUamCT976vWUL-i5hkoDrsJC3EAmxlUbYGQ9-rQxMIDL3nkw=w3024-h1648" width="200" alt="Nest Logo" /></a>
+ <img src="https://lh3.googleusercontent.com/u/0/drive-viewer/AEYmBYR4PhnWOXfc3pJilsa8EtS2anLtpgPtUb3VJPU7V32rjJGUamCT976vWUL-i5hkoDrsJC3EAmxlUbYGQ9-rQxMIDL3nkw=w3024-h1648" width="400" alt="modelo db" /></a>
 </p>
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Requerimientos
 
-## Installation
+**1:**  agregar una nueva franquicia.
+**2:**  agregar una nueva sucursal a una franquicia.
+**3:**  agregar un nuevo producto a una sucursal.
+**4:**  modificar el stock de un producto.
+**5:**  mostrar cual es el producto que más stock tiene por sucursal para una franquicia puntual.
+**6:**  Persistencia de datos
+
+## Vesiones 
+
+**Backend:** Nest.js, node v18
+
+**DataBase:** MySQL:8.3
+
+
+## Instalaccion Docker
+
+Inicializacion con dockers en la raiz del proyecto ejecutar
 
 ```bash
-$ yarn install
+  docker-compose up -d --build
 ```
 
-## Running the app
+Este comando deberia permitir ya el ingreso a toda la prueba
 
+- Endpoint front: http://localhost:3000
+- Conexion a bd http://localhost:3306
+
+
+## Instalaccion Manual
+Instalacion manual usar node v18
+
+en la carpeta raiz del proyecto ejecutamos los siguientes comandos.
+
+Backend 
+- Lista de comandos
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+  cd backend
+  yarn install || npm install
+  yarn start:dev || npm start:dev
 ```
 
-## Test
-
+Base de datos
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+  docker-compose start mysql
 ```
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Tests
 
-## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+No se implementaron test, pero en futura version se agregaran.
 
-## License
 
-Nest is [MIT licensed](LICENSE).
+
+[Postman]: <https://documenter.getpostman.com/view/3188599/2s9YymFQ6i>
