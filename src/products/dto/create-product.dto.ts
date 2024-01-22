@@ -11,4 +11,8 @@ export class CreateProductDto {
   @IsString()
   @IsOptional()
   description?: string;
+
+  @IsInt()
+  @IsPositive()
+  franchiseId: number;
 }

@@ -1,9 +1,11 @@
+import { Franchise } from 'src/franchises/entities/franchise.entity';
 import { Stock } from 'src/stock/entities/stock.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -34,4 +36,9 @@ export class Product {
 
   @OneToMany(() => Stock, (stock) => stock.products)
   stock: Stock;
+
+  @ManyToOne(() => Franchise, (franchise) => franchise.id, {
+    eager: true,
+  })
+  franchise: Franchise;
 }

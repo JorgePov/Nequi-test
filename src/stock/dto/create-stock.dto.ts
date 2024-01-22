@@ -1,12 +1,14 @@
-import { IsNumber } from 'class-validator';
+import { IsInt, IsPositive } from 'class-validator';
 
 export class CreateStockDto {
-  @IsNumber()
+  @IsInt()
   units: number;
 
-  @IsNumber()
+  @IsInt()
+  @IsPositive()
   productId: number;
 
-  @IsNumber()
+  @IsInt()
+  @IsPositive()
   branchId: number;
 }

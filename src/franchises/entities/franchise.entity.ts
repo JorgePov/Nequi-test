@@ -1,4 +1,5 @@
 import { Branch } from 'src/branches/entities/branch.entity';
+import { Product } from 'src/products/entities/product.entity';
 import {
   Column,
   CreateDateColumn,
@@ -28,4 +29,7 @@ export class Franchise {
 
   @OneToMany(() => Branch, (post) => post.franchise)
   branches: Branch;
+
+  @OneToMany(() => Product, (product) => product.franchise)
+  products: Product;
 }
