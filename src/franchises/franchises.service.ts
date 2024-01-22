@@ -1,4 +1,8 @@
-import { BadRequestException, Controller } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { CreateFranchiseDto } from './dto/create-franchise.dto';
 import { UpdateFranchiseDto } from './dto/update-franchise.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,6 +15,7 @@ export class FranchisesService {
     @InjectRepository(Franchise)
     private readonly FranchiseRepository: Repository<Franchise>,
   ) {}
+
   async create(createFranchiseDto: CreateFranchiseDto) {
     const newFranchise = this.FranchiseRepository.create({
       ...createFranchiseDto,
@@ -22,7 +27,7 @@ export class FranchisesService {
     return await this.FranchiseRepository.find();
   }
 
-  async findOne(id: number) {
+  async findOne(id: number): Promise<Franchise> {
     const franchiseById = await this.FranchiseRepository.findOneBy({ id });
 
     if (!franchiseById) {
@@ -33,22 +38,26 @@ export class FranchisesService {
   }
 
   async update(id: number, updateFranchiseDto: UpdateFranchiseDto) {
-    const franchiseById = await this.FranchiseRepository.findOneBy({ id });
+    await this.findOne(id);
 
-    if (!franchiseById) {
-      throw new BadRequestException('Franchise not found');
+    try {
+      await this.FranchiseRepository.update(id, updateFranchiseDto);
+
+      return { message: 'Franchise updated successfully' };
+    } catch (error) {
+      throw new InternalServerErrorException();
     }
-
-    return await this.FranchiseRepository.update(id, updateFranchiseDto);
   }
 
   async remove(id: number) {
-    const franchiseById = await this.FranchiseRepository.findOneBy({ id });
+    await this.findOne(id);
 
-    if (!franchiseById) {
-      throw new BadRequestException('Franchise not found');
+    try {
+      await this.FranchiseRepository.softDelete({ id });
+
+      return { message: 'Franchise deleted successfully' };
+    } catch (error) {
+      throw new InternalServerErrorException();
     }
-
-    return await this.FranchiseRepository.softDelete({ id });
   }
 }
